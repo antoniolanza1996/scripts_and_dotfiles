@@ -1,0 +1,20 @@
+#!/bin/bash                                                                                             
+
+if [[ $# -ne 2 ]];then
+	echo -e "This bash script searches text on all files of a directory (or a single file) on MacOS.\n\n"
+	echo -e "Usage: \"search search_query dir_or_file\"\n"
+	echo -e "Examples of usage:"
+        echo -e "\t 1) search word1 ."
+        echo -e "\t 2) search \"word1\sword2\sword3\" my_directory"
+	echo -e "\t 3) search import my_script.py"
+	exit 1
+fi
+
+search_query=$1
+dir_or_file=$2
+
+# Source: https://superuser.com/a/1261504
+ag $search_query --depth -1 --stats $dir_or_file
+
+# if you want to see only the names of files containing matches, not the matching lines
+# ag $search_query --depth -1 --files-with-matches --stats $dir_or_file

@@ -1,0 +1,54 @@
+#!/bin/bash                                                                                             
+
+if [[ $# == 3 ]];then
+	remindersList="Promemoria" # This is the italian default Reminders list.
+	# The english one should be "Reminders".
+	# Note: if you have created a custom list, set this name accordingly.
+	reminderTitle=$1
+	dueDayTmp=$2
+	dueTime=$3
+elif [[ $# == 4 ]];then
+	remindersList=$1
+	reminderTitle=$2
+	dueDayTmp=$3
+	dueTime=$4
+else
+	echo -e "This bash script creates a new reminder in Apple Reminders on MacOS.\n\n"
+	echo -e "Usage: \"remind [remindersList] title date time\"\n"
+	echo -e "Examples of usage:"
+	echo -e "\t 1) remind \"Drink water\" 12/02/2022 16:45"
+	echo -e "\t 2) remind \"Drink water\" today 16:45"
+	echo -e "\t 3) remind \"Drink water\" tomorrow 16:45"
+	echo -e "\t 4) remind \"Drink water\" \"next monday\" 16:45"
+	echo -e "\t 5) remind \"Drink water\" \"next friday\" 16:45"
+	echo -e "\t 6) remind work \"Push code on GitHub\" friday 16:45"
+	exit 1
+fi
+
+if [[ "$dueDayTmp" =~ ^[0-9]{2}/[0-9]{2}/[0-9]{4}$ ]] && [[ "$dueDayTmp" == $(date -r $(date -j -f "%d/%m/%Y" "$dueDayTmp" "+%s") "+%d/%m/%Y") ]] &> /dev/null;then
+	# Date input=dd/mm/yyyy. Source: https://stackoverflow.com/a/55543562/7069907
+	dueDay=$dueDayTmp
+else
+	dueDay=$(gdate --date="$dueDayTmp" +%d/%m/%Y) # Note: install gdate with coreutils (e.g. brew install coreutils)
+	status=$?
+	if [[ $status != 0 ]];then
+		echo "Exit without saving any reminder..."
+		exit 2
+	fi
+fi
+osascript - "$remindersList" "$reminderTitle" "$dueDay" "$dueTime" <<END
+on run argv                                        
+	set dueDateConcatenated to date (item 3 of argv & " " & item 4 of argv)
+	tell application "Reminders"
+		if (exists list (item 1 of argv)) then
+			tell list (item 1 of argv)
+				make new reminder with properties {name:item 2 of argv, due date:dueDateConcatenated}
+				log "\t✅ Reminder \"" & (item 2 of argv) & "\" has been added to the \"" & (item 1 of argv) & "\" list!\n\t⏰ Due date: " & (dueDateConcatenated)
+			end tell
+		else
+			log "\"" & (item 1 of argv) & "\" list doesn't exist... Exit without saving any reminder..."
+			error number -3
+		end if
+	end tell
+end run
+END

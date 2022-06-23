@@ -1,0 +1,9 @@
+# linting
+flake8==4.0.1  # PEP 8
+black==22.3.0  # PEP 8 compliant code formatter
+
+# static typing
+mypy==0.942  # PEP 484
+
+# docstring conventions
+pydocstyle==6.1.1  # PEP 257

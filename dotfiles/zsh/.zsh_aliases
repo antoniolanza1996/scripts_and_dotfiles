@@ -1,0 +1,25 @@
+alias stop="sudo shutdown -s now%"
+alias close="sudo shutdown -h now%"
+
+# special characters print
+alias tilde="echo \"tilde = ~\""
+alias backtick="echo \"backtick = \\\`\""
+
+
+# `cd` shortcuts
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias desktop="cd ~/Desktop"
+alias downloads="cd ~/Downloads"
+alias scripts_and_dot_files="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/scripts_and_dotfiles/"
+
+# Recursively delete all `.DS_Store` files
+alias ds_store_delete="find . -type f -name '*.DS_Store' -ls -delete"
+
+# Print each $PATH entry on a separate line
+alias path='echo -e ${PATH//:/\\n}'
+
+# Simulate timer
+alias timer='echo "Timer started. Stop it using Ctrl-D." && date && time cat && date'

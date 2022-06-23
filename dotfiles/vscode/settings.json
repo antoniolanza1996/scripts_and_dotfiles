@@ -1,0 +1,33 @@
+{
+    "security.workspace.trust.untrustedFiles": "open",
+    "python.defaultInterpreterPath": "/opt/anaconda3/bin/python",
+    "terminal.integrated.inheritEnv": false,
+    "workbench.colorTheme": "Visual Studio Light",
+    "editor.unicodeHighlight.nonBasicASCII": false,
+    "editor.wordWrap": "on",
+    "python.testing.unittestEnabled": true,
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.mypyEnabled": true,
+    "python.linting.mypyArgs": [
+        "--disallow-untyped-defs",
+        "--disallow-any-unimported",
+        "--no-implicit-optional",
+        "--warn-unreachable",
+        "--warn-unused-ignores",
+        "--show-error-codes",
+    ],
+    "python.linting.pydocstyleEnabled": false,
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "119"
+    ],
+    "python.linting.flake8Args": [
+        "--max-line-length=119",
+    ],
+    "notebook.output.textLineLimit": 100,
+    "editor.largeFileOptimizations": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "window.zoomLevel": 1,
+}
