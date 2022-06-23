@@ -5,7 +5,6 @@ alias close="sudo shutdown -h now%"
 alias tilde="echo \"tilde = ~\""
 alias backtick="echo \"backtick = \\\`\""
 
-
 # `cd` shortcuts
 alias ..="cd .."
 alias ...="cd ../.."
