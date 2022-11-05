@@ -12,10 +12,14 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias desktop="cd ~/Desktop"
 alias downloads="cd ~/Downloads"
-alias scripts_and_dot_files="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/scripts_and_dotfiles/"
+alias dw="cd ~/Downloads"
+alias scripts_and_dotfiles="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/scripts_and_dotfiles/"
 
 # Recursively delete all `.DS_Store` files
 alias ds_store_delete="find . -type f -name '*.DS_Store' -ls -delete"
+
+# delete all `.mypy_cache` directories
+alias mypy_cache_delete="find . -path '*.mypy_cache/*' -delete && find . -type d -name '*.mypy_cache' -empty -delete -ls"
 
 # Print each $PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
