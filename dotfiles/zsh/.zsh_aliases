@@ -20,6 +20,7 @@ alias ds_store_delete="find . -type f -name '*.DS_Store' -ls -delete"
 
 # delete all `.mypy_cache` directories
 alias mypy_cache_delete="find . -path '*.mypy_cache/*' -delete && find . -type d -name '*.mypy_cache' -empty -delete -ls"
+alias pycache_delete="find . -path '*__pycache__/*' -delete && find . -type d -name '__pycache__' -empty -delete -ls"
 
 # Print each $PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
